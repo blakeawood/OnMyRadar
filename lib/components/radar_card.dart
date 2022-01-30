@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:on_my_radar/main.dart';
-import 'package:on_my_radar/screens/edit_item_modal.dart';
 
 class RadarCard extends StatelessWidget {
   String name, month, day, year, amount;
@@ -31,9 +29,84 @@ class RadarCard extends StatelessWidget {
             top: Radius.circular(18),
           )),
           context: context,
-          builder: (context) => EditItemModal(),
+          builder: (context) => SizedBox(
+            height: height * .80,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 12, 6, 44),
+                        child: SizedBox(
+                          width: width * .44,
+                          height: height * .08,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              HapticFeedback.heavyImpact();
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(9),
+                                    side: const BorderSide(
+                                        width: 1, color: Colors.black)),
+                              ),
+                            ),
+                            child: const Text(
+                              "Remove",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(6, 12, 12, 44),
+                        child: SizedBox(
+                          width: width * .44,
+                          height: height * .08,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              HapticFeedback.heavyImpact();
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.black),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                ),
+                              ),
+                            ),
+                            child: const Text(
+                              "Paid",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
           isScrollControlled: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
         );
         print("item tapped");
       },
@@ -83,7 +156,7 @@ class RadarCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(3, 3, 3, 1),
                         child: AutoSizeText(
-                          "${day}",
+                          day,
                           maxLines: 1,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
@@ -96,7 +169,7 @@ class RadarCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(3, 0, 3, 3),
                         child: AutoSizeText(
-                          "${month}",
+                          month,
                           maxLines: 1,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
@@ -120,7 +193,7 @@ class RadarCard extends StatelessWidget {
                   left: 1,
                 ),
                 child: AutoSizeText(
-                  "${name}",
+                  name,
                   maxLines: 1,
                   textAlign: TextAlign.left,
                   style: const TextStyle(
@@ -137,7 +210,7 @@ class RadarCard extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       top: 8, left: 8, bottom: 8, right: 30),
                   child: AutoSizeText(
-                    "\$${amount}",
+                    "\$$amount",
                     maxLines: 1,
                     textAlign: TextAlign.right,
                     style: const TextStyle(

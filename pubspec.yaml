@@ -50,6 +50,7 @@ dependencies:
   custom_refresh_indicator: ^1.0.0
   expand_tap_area: ^1.1.0
   popup_card: ^0.1.0
+  google_fonts: ^2.2.0
 
 
 dev_dependencies:

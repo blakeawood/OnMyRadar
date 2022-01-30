@@ -1,27 +1,35 @@
 import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 import 'package:on_my_radar/components/dropdown_month.dart';
 import 'package:on_my_radar/components/modal_button.dart';
 import 'package:on_my_radar/components/radar_card.dart';
-import 'package:on_my_radar/screens/add_item_modal.dart';
+
 import 'package:on_my_radar/utils/theme.dart';
 //import 'package:/utils/theme.dart';
 
-class Dashboard extends StatelessWidget {
-  //final ExperienceViewModel vm = Get.put(ExperienceViewModel());
+class Dashboard extends StatefulWidget {
+  const Dashboard({Key? key}) : super(key: key);
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   final height = Get.height;
   final width = Get.width;
-
   final DateTime now = DateTime.now();
   final formatter = DateFormat('MM-dd');
-  //final DateTime date = DateTime(now.year, now.month, now.day);
 
-  final List<String> radarList = ["dfdafdasfdsa"];
-
-  Dashboard({Key? key}) : super(key: key);
+  final List<String> radarList = [
+    "home idfafd",
+    "home idfafd",
+    "home idfafd",
+    "home idfafd",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -68,19 +76,61 @@ class Dashboard extends StatelessWidget {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          backgroundColor: OMRTheme.primary,
-          onPressed: () => showModalBottomSheet(
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-              top: Radius.circular(18),
-            )),
-            context: context,
-            builder: (context) => AddItemModal(),
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-          ),
-        ),
+            child: const Icon(Icons.add),
+            backgroundColor: OMRTheme.primary,
+            onPressed: () => {
+                  HapticFeedback.heavyImpact(),
+                  showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(18),
+                    )),
+                    context: context,
+                    builder: (context) => SizedBox(
+                      height: height * .80,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Center(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(18, 12, 18, 55),
+                              child: SizedBox(
+                                width: width * .88,
+                                height: height * .08,
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    HapticFeedback.heavyImpact();
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all(Colors.black),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(9),
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    "Add Item",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    isScrollControlled: true,
+                    backgroundColor: Colors.white,
+                  ),
+                }),
       ),
     );
   }
@@ -110,7 +160,7 @@ class Dashboard extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return RadarCard(
-                            name: radarList[index],
+                            name: "Home insurance",
                             amount: "123",
                             day: '23',
                             //icon: Icon(Icons.more_vert),
