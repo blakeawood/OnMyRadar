@@ -59,7 +59,7 @@ class _DropdownMonthState extends State<DropdownMonth> {
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
-                color: Color(0xff000000),
+                color: Color(0xff4A34CF),
               ),
               textAlign: TextAlign.center,
             ),

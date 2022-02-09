@@ -2,14 +2,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:on_my_radar/models/task.dart';
 
 class RadarCard extends StatelessWidget {
-  final Task task;
+  String name, month, day, year, amount;
 
   RadarCard({
-    required this.task,
     Key? key,
+    required this.month,
+    required this.day,
+    required this.year,
+    required this.name,
+    required this.amount,
+    //required this.icon,
   }) : super(key: key);
 
   @override
@@ -104,11 +108,12 @@ class RadarCard extends StatelessWidget {
           isScrollControlled: true,
           backgroundColor: Colors.white,
         );
+        print("item tapped");
       },
       child: Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        width: (width * .9),
+        width: (width * .8),
         height: (height * .09),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -147,15 +152,14 @@ class RadarCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(3, 3, 3, 1),
+                        padding: const EdgeInsets.fromLTRB(3, 3, 3, 1),
                         child: AutoSizeText(
-                          //TODO: Implement day of month
-                          "12",
+                          day,
                           maxLines: 1,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
@@ -163,13 +167,12 @@ class RadarCard extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(3, 0, 3, 3),
+                        padding: const EdgeInsets.fromLTRB(3, 0, 3, 3),
                         child: AutoSizeText(
-                          //TODO: Implement day of month
-                          "Mar",
+                          month,
                           maxLines: 1,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.red,
@@ -190,7 +193,7 @@ class RadarCard extends StatelessWidget {
                   left: 1,
                 ),
                 child: AutoSizeText(
-                  "${task.name}",
+                  name,
                   maxLines: 1,
                   textAlign: TextAlign.left,
                   style: const TextStyle(
@@ -207,7 +210,7 @@ class RadarCard extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       top: 8, left: 8, bottom: 8, right: 30),
                   child: AutoSizeText(
-                    "\$${task.amount}",
+                    "\$$amount",
                     maxLines: 1,
                     textAlign: TextAlign.right,
                     style: const TextStyle(
